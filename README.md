@@ -13,7 +13,7 @@ The **Calvary Onboarding System** is a Spring Boot application that provides use
 - Swagger API Documentation
 
 ## Tech Stack
-- **Backend:** Java 11, Spring Boot, Spring Security, Keycloak
+- **Backend:** Java , Spring Boot, Spring Security, Keycloak
 - **Database:** MongoDB
 - **Messaging:** Kafka
 - **Search:** Elasticsearch
@@ -24,10 +24,9 @@ The **Calvary Onboarding System** is a Spring Boot application that provides use
 
 ### Prerequisites
 Ensure you have the following installed:
-- Java 11
+- Java 
 - Maven 3+
 - MongoDB
-- Keycloak Server
 - Kafka (Optional for messaging features)
 
 ### Installation Steps
@@ -38,7 +37,7 @@ Ensure you have the following installed:
    ```
 
 2. **Configure Application Properties:**
-   Update `application.properties` or `application.yml` with your database, Keycloak, and other configurations.
+   Update `application.properties` or `application.yml` with your database, and other configurations.
 
 3. **Build the Project:**
    ```sh
@@ -53,7 +52,7 @@ Ensure you have the following installed:
 5. **Access API Documentation:**
    Open your browser and navigate to:
    ```
-   http://localhost:8080/swagger-ui/index.html
+   http://localhost:8915/swagger-ui/index.html
    ```
 
 ## Git Configuration
