@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the application JAR file into the container
-COPY target/*.jar app.jar
+COPY target/onborading-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the application port (update this if needed)
 EXPOSE 8915
