@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.calvary.onboarding.dto.AuthenticationDto;
+import com.calvary.onboarding.dto.PasswordResest;
 import com.calvary.onboarding.dto.SignUpDto;
 import com.calvary.onboarding.dto.TokenDto;
 import com.calvary.onboarding.service.UserService;
@@ -36,7 +37,7 @@ public class UserController {
 	}
 
 	@PutMapping("/user/first-time-Password")
-	public ResponseEntity<String> firstTimePassword(AuthenticationDto authDto) {
+	public ResponseEntity<String> firstTimePassword(PasswordResest authDto) {
 		if (ObjectUtils.isEmpty(authDto)) {
 			log.info("Sign-up request cannot be empty");
 			throw new IllegalArgumentException("Sign-up request body is missing");

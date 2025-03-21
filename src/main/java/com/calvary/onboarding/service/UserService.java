@@ -23,6 +23,7 @@ import com.calvary.onboarding.Dao.RoleDao;
 import com.calvary.onboarding.Dao.UserDao;
 import com.calvary.onboarding.config.enun.Gender;
 import com.calvary.onboarding.dto.AuthenticationDto;
+import com.calvary.onboarding.dto.PasswordResest;
 import com.calvary.onboarding.dto.SignUpDto;
 import com.calvary.onboarding.dto.TokenDto;
 import com.calvary.onboarding.exception.EmailAlreadyRegisteredException;
@@ -152,7 +153,7 @@ public class UserService {
 		return password.toString();
 	}
 
-	public String firstTimePassword(AuthenticationDto authDto) {
+	public String firstTimePassword(PasswordResest authDto) {
 		log.info("inside register of first time password ..");
 		// checking if username exists ..
 		log.info("userName can be email or phone number ");
@@ -166,7 +167,7 @@ public class UserService {
 
 		Role roleFrmDb = roleDao.findByRoleName(ADMIN_ROLE);
 		String salt = PasswordMapper.generateSalt();
-		String hashedPassword = PasswordMapper.hashPassword(authDto.getPassword(), salt);
+		String hashedPassword = PasswordMapper.hashPassword(authDto.getGeneratedPassword(), salt);
 
 		if (ObjectUtils.isEmpty(roleFrmDb)) {
 			Role role = new Role();
@@ -181,14 +182,14 @@ public class UserService {
 			user.setRoles(Collections.singleton(roleFrmDb));
 		}
 
-		boolean isPasswordValid = CommonsUtils.isPasswordValid(user.getGeneratedPassword(), authDto.getPassword(),
+		boolean isPasswordValid = CommonsUtils.isPasswordValid(user.getGeneratedPassword(), authDto.getGeneratedPassword(),
 				user.getSalt());
 		if (!isPasswordValid) {
 			log.info("password and the one time password generated do not match");
 			throw new BadCredentialsException("password and the one time password generated do not match");
 		}
 		user.setSalt(salt);
-		user.setPassword(hashedPassword);
+		user.setPassword(PasswordMapper.hashPassword(authDto.getNewPassword(), salt));
 		userDao.saveUpdateUser(user);
 		return "Thank you for setting up your first time password you can now proceed to resest password of you choice if you want to ";
 	}
