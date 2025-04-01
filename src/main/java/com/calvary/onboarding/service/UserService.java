@@ -95,7 +95,11 @@ public class UserService {
 		userEntity.setEmail(signUpDto.getEmail());
 		userEntity.setGeneratedPassword(hashedPassword);
 		userEntity.setCountry(signUpDto.getCountry());
-		userEntity.setGender(Gender.valueOf(signUpDto.getGender()).name());
+		if (Gender.MALE.name().equalsIgnoreCase(signUpDto.getGender())) {
+			userEntity.setGender(Gender.MALE.name());
+		} else {
+			userEntity.setGender(Gender.FEMALE.name());
+		}
 		userEntity.setCreatedBy(userEntity.getId().toString());
 		userEntity.setCreatedDate(LocalDateTime.now());
 		if (!ObjectUtils.isEmpty(signUpDto.getEmail())) {
