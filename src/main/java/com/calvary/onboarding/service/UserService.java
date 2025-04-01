@@ -98,6 +98,11 @@ public class UserService {
 		userEntity.setGender(Gender.valueOf(signUpDto.getGender()).name());
 		userEntity.setCreatedBy(userEntity.getId().toString());
 		userEntity.setCreatedDate(LocalDateTime.now());
+		if (!ObjectUtils.isEmpty(signUpDto.getEmail())) {
+			SMSService.sendWelcomeEmail(signUpDto.getEmail(), firstName, lastName, generatedPassword);
+		} else if (!ObjectUtils.isEmpty(signUpDto.getPhoneNumber())) {
+			log.info("phone number verification is yet to proceed..");
+		}
 		User savedUser = userDao.saveUpdateUser(userEntity);
 		RegistrationPayment payment = new RegistrationPayment();
 		payment.setId(UUID.randomUUID());
@@ -107,11 +112,7 @@ public class UserService {
 		payment.setCreatedDate(new Date());
 		payment.setUser(savedUser);
 		RegistrationPayment savePayment = paymentDao.savePayment(payment);
-		if (!ObjectUtils.isEmpty(signUpDto.getEmail())) {
-			SMSService.sendWelcomeEmail(savedUser.getEmail(), firstName, lastName, generatedPassword);
-		} else if (!ObjectUtils.isEmpty(signUpDto.getPhoneNumber())) {
-			log.info("phone number verification is yet to proceed..");
-		}
+		
 
 		// Manual Mapping from Entity back to DTO
 		SignUpDto responseDto = new SignUpDto();
@@ -167,7 +168,6 @@ public class UserService {
 
 		Role roleFrmDb = roleDao.findByRoleName(ADMIN_ROLE);
 		String salt = PasswordMapper.generateSalt();
-		String hashedPassword = PasswordMapper.hashPassword(authDto.getGeneratedPassword(), salt);
 
 		if (ObjectUtils.isEmpty(roleFrmDb)) {
 			Role role = new Role();
