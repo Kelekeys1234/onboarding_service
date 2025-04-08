@@ -51,7 +51,7 @@ public class EmailService {
 				+ "                  Click on the link below to make payment.... it is that simple.\r\n"
 				+ "                </p>\r\n" + "              </td>\r\n" + "            </tr>\r\n"
 				+ "            <tr>\r\n" + "              <td style=\"margin: 5px 0\" align=\"center\">\r\n"
-				+ "                <a href=http://localhost:3000/payment?userId=" + userId
+				+ "                <a href=https://mngp.vercel.app/payment?userId=" + userId
 				+ " style=\"text-decoration: none; border: 1px solid #c71e4c; padding: 16px; margin: 5px 0; color: white; background-color: #c71e4c; display: block; width: 40%\">Proceed to payment</a>\r\n"
 				+ "              </td>\r\n" + "            </tr>\r\n" + "            <tr>\r\n"
 				+ "              <td style='padding: 10px 0; color: #333333;'>\r\n"
