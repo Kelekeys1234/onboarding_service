@@ -20,7 +20,7 @@ public class EmailService {
 
 	public String sendWelcomeEmail(String to, String firstName, String lastName, String password, String userId) {
 		String subject = "Welcome to Nehemiah Global Partners!";
-		String body = "@Kelly  <html lang='en'>\r\n" + "  <head>\r\n" + "    <meta charset='UTF-8' />\r\n"
+		String body = "<html lang='en'>\r\n" + "  <head>\r\n" + "    <meta charset='UTF-8' />\r\n"
 				+ "    <meta name='viewport' content='width=device-width, initial-scale=1.0' />\r\n"
 				+ "    <title>MNGP Email template</title>\r\n" + "  </head>\r\n" + "  <body\r\n"
 				+ "    style='font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;'\r\n"
@@ -51,7 +51,7 @@ public class EmailService {
 				+ "                  Click on the link below to make payment.... it is that simple.\r\n"
 				+ "                </p>\r\n" + "              </td>\r\n" + "            </tr>\r\n"
 				+ "            <tr>\r\n" + "              <td style=\"margin: 5px 0\" align=\"center\">\r\n"
-				+ "                <a href=https://mngp.vercel.app/payment?$" + userId
+				+ "                <a href=http://localhost:3000/payment?userId=" + userId
 				+ " style=\"text-decoration: none; border: 1px solid #c71e4c; padding: 16px; margin: 5px 0; color: white; background-color: #c71e4c; display: block; width: 40%\">Proceed to payment</a>\r\n"
 				+ "              </td>\r\n" + "            </tr>\r\n" + "            <tr>\r\n"
 				+ "              <td style='padding: 10px 0; color: #333333;'>\r\n"
