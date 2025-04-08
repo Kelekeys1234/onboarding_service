@@ -84,7 +84,8 @@ public class UserService {
 
 		// Manual Mapping from DTO to Entity
 		User userEntity = new User();
-		userEntity.setId(UUID.randomUUID());
+		UUID id = UUID.randomUUID();
+		userEntity.setId(id);
 		Name name = new Name();
 		name.setFirstName(firstName);
 		name.setLastName(lastName);
@@ -103,7 +104,7 @@ public class UserService {
 		userEntity.setCreatedBy(userEntity.getId().toString());
 		userEntity.setCreatedDate(LocalDateTime.now());
 		if (!ObjectUtils.isEmpty(signUpDto.getEmail())) {
-			SMSService.sendWelcomeEmail(signUpDto.getEmail(), firstName, lastName, generatedPassword);
+			SMSService.sendWelcomeEmail(signUpDto.getEmail(), firstName, lastName, generatedPassword, id.toString());
 		} else if (!ObjectUtils.isEmpty(signUpDto.getPhoneNumber())) {
 			log.info("phone number verification is yet to proceed..");
 		}
